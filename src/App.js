@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import { connect } from 'react-redux';
 
-function App() {
+import { fetchTemplatesStart } from './redux/templates/templates.actions';
+import TemplateListContainer from './components/template-list-container/template-list-container';
+
+const App = ({ fetchTemplatesStart }) => {
+  useEffect(() => {
+    let unsubscribe = fetchTemplatesStart();
+
+    return () => {
+      unsubscribe();
+    };
+  }, [fetchTemplatesStart]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <TemplateListContainer />
     </div>
   );
-}
-
-export default App;
+};
+const mapDispatchToProps = (dispatch) => ({
+  fetchTemplatesStart: () => dispatch(fetchTemplatesStart()),
+});
+export default connect(null, mapDispatchToProps)(App);

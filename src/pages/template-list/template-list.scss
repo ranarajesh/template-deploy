@@ -1,0 +1,21 @@
+.temp-grid {
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 2fr 1fr 1fr;
+  grid-gap: 2em;
+  color: #222;
+  border-bottom: 1px solid #ddd;
+  padding: 1em 0;
+  &.grid-header {
+    text-decoration: underline;
+    border-bottom: 1px solid;
+    font-weight: 800;
+
+    label:last-child {
+      text-align: right;
+    }
+  }
+  &.grid-item {
+    word-break: break-all;
+  }
+}
